@@ -1,0 +1,32 @@
+<div class="container">
+
+  <h1>Dynamic {{measureName}} Measure Example</h1>
+  <hr/>
+
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="globalItems.formGroup">
+        <div viewMode="basic" [rxwebDynamicForm]="globalItems" [uiBindings]="globalUiBindings">
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <h2 class="col-12">Existing {{measureName}}</h2>
+    <div class="col-6">
+      <form [formGroup]="existing.formGroup">
+        <div viewMode="basic" [rxwebDynamicForm]="existing" [uiBindings]="existingUiBindings">
+        </div>
+      </form>
+    </div>
+    <div class="col-6">
+      <form [formGroup]="replacement.formGroup">
+        <div viewMode="basic" [rxwebDynamicForm]="replacement" [uiBindings]="replacementUiBindings">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<button (click)="pressme()">pressme</button>
