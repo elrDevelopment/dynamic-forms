@@ -7,6 +7,7 @@ import { DynoFormsComponent } from './dyno-forms/dyno-forms.component';
 import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RxReactiveDynamicFormsModule} from '@rxweb/reactive-dynamic-forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {RxReactiveDynamicFormsModule} from '@rxweb/reactive-dynamic-forms';
     FormsModule,
     RxReactiveFormsModule,
     RxReactiveDynamicFormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

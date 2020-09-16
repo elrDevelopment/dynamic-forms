@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DynamicFormBuildConfig, DynamicFormConfiguration, RxDynamicFormBuilder} from '@rxweb/reactive-dynamic-forms';
 import { ReactiveFormConfig } from '@rxweb/reactive-form-validators';
 import {ScriptLoaderService} from '../services/script-loader.service';
+import { FormPostService } from '../services/form-post/form-post.service';
 
 declare var hello: any;
 declare var getUnitCopay: any;
@@ -28,7 +29,11 @@ export class DynoFormsComponent implements OnInit {
 
   dynamicFormConfiguration: DynamicFormConfiguration;
 
-  constructor(private dynamicFormBuilder: RxDynamicFormBuilder, private scripts: ScriptLoaderService) {
+  constructor(
+    private dynamicFormBuilder: RxDynamicFormBuilder, 
+    private scripts: ScriptLoaderService,
+    private formService: FormPostService
+  ) {
   }
 
 
@@ -53,12 +58,22 @@ export class DynoFormsComponent implements OnInit {
     }).catch(error => console.log(error));
   }
 
-
+  isFormValid(): boolean {
+    return this.globalItems.formGroup.status === 'VALID' &&
+      this.existing.formGroup.status === 'VALID' &&
+      this.replacement.formGroup.status === 'VALID'
+  }
 
   pressme(): void{
     const watts = this.existing.formGroup.value.wattage;
     const copayAmount = getUnitCopay(watts, 22);
     console.log('this is the copay amount from line 61 in dyno-forms: ', copayAmount);
+    const formBody = {
+      globalItems: this.globalItems.formGroup.value,
+      existing: this.existing.formGroup.value,
+      replacement: this.replacement.formGroup.value
+    }
+    this.formService.postForm(formBody)
   }
 
 }
